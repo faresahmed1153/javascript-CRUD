@@ -63,7 +63,17 @@ function updateProduct1(index) {
   document.getElementById("update").value = index;
 }
 function updateProduct2() {
+  if (products.length < 1) {
+    document.getElementById("create").style.display = "inline-block";
+    document.getElementById("update").style.display = "none";
+    return;
+  }
   index = document.getElementById("update").value;
+  if (products[index] == undefined) {
+    document.getElementById("create").style.display = "inline-block";
+    document.getElementById("update").style.display = "none";
+    return;
+  }
   products[index].pName = productName.value;
   products[index].pCategory = productCategory.value;
   products[index].pPrice = productPrice.value;
