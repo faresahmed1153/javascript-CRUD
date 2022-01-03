@@ -1,9 +1,15 @@
-var products = [];
-
 var productName = document.getElementById("productName");
 var productCategory = document.getElementById("productCategory");
 var productPrice = document.getElementById("productPrice");
 var productDescription = document.getElementById("productDescription");
+
+if (localStorage.getItem("arr") != null) {
+  var products = JSON.parse(localStorage.getItem("arr"));
+} else {
+  var products = [];
+}
+
+displayProduct();
 
 function createProduct() {
   var product = {
@@ -14,7 +20,7 @@ function createProduct() {
   };
 
   products.push(product);
-  console.log(products);
+  localStorage.setItem("arr", JSON.stringify(products));
 
   displayProduct();
   clearForm();
@@ -50,6 +56,7 @@ function clearForm() {
 
 function deleteProduct(index) {
   products.splice(index, 1);
+  localStorage.setItem("arr", JSON.stringify(products));
   displayProduct();
 }
 
@@ -78,6 +85,7 @@ function updateProduct2() {
   products[index].pCategory = productCategory.value;
   products[index].pPrice = productPrice.value;
   products[index].pDescription = productDescription.value;
+  localStorage.setItem("arr", JSON.stringify(products));
 
   document.getElementById("create").style.display = "inline-block";
   document.getElementById("update").style.display = "none";
